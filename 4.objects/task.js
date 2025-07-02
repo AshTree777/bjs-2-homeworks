@@ -10,22 +10,20 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marksToAdd) {
-    if (length.marksToAdd !== 0) {
+    if (this.hasOwnProperty('marks')) {
         this.marks.push(...marksToAdd);
     }
 }
 
 Student.prototype.getAverage = function () {
-    if (this.hasOwnProperty('marks') && (this.marks.length !== 0)) {
-        return this.marks.reduce((acc, element) => (acc + element)) / this.marks.length;
+    if (this.hasOwnProperty('marks') && this.marks.length !== 0) {
+        return this.marks.reduce((acc, element) => acc + element) / this.marks.length;
     }
     return 0;
 }
 
 Student.prototype.exclude = function (reason) {
-    if (this.marks.length === 0) {
-        delete this.marks;
-        delete this.subject;
-        this.exclude = reason;
-    }
+    delete this.marks;
+    delete this.subject;
+    this.excluded = reason;
 }
